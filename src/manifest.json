@@ -7,6 +7,11 @@
   "browser_action": {
     "default_popup": "popup.html"
   },
+  "content_scripts": [{
+    "matches": ["https://www.pandora.com/*"],
+    "js": ["contentScript.bundle.js"]
+
+  }],
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
