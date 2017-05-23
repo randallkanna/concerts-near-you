@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import EventSection from './event_section_component';
+import PropTypes from 'prop-types';
 
  class App extends Component {
 
