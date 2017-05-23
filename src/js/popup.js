@@ -1,4 +1,9 @@
 import "../css/popup.css";
-import hello from "./popup/example";
+import App from "./popup/app_component.jsx";
+import React from "react";
+import { render } from "react-dom";
 
-hello();
+render(
+  <App artist="Tool" />,
+  window.document.getElementById("app-container")
+);

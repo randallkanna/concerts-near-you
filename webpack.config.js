@@ -18,7 +18,8 @@ var options = {
   entry: {
     popup: path.join(__dirname, "src", "js", "popup.js"),
     options: path.join(__dirname, "src", "js", "options.js"),
-    background: path.join(__dirname, "src", "js", "background.js")
+    background: path.join(__dirname, "src", "js", "background.js"),
+    contentScript: path.join(__dirname, "src", "js", "contentScript.js")
   },
   output: {
     path: path.join(__dirname, "build"),
@@ -26,11 +27,13 @@ var options = {
   },
   module: {
     rules: [
+      { test: /\.(js|jsx)$/, loader: "babel-loader", exclude: /node_modules/ },
       { test: /\.css$/, loader: "style-loader!css-loader", exclude: /node_modules/  }
     ]
   },
   resolve: {
-    alias: alias
+    alias: alias,
+    extensions: [".js", ".jsx", ".css"]
   },
   plugins: [
     // expose and write the allowed env vars on the compiled bundle
