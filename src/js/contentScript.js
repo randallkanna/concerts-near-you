@@ -93,14 +93,19 @@ function findEventsNearYou(artist) {
       updateArtist({artist, coords: position.coords});
     });
   } else {
-    updateArtist({artist, coords: null});
+    updateArtist({artist});
   }
 }
 
 function updateArtist({artist, coords}) {
-  const geo = {
-    longitude: coords.longitude,
-    latitude: coords.latitude
+  let geo;
+
+  if (!coords) { geo = null; }
+  else {
+    geo = {
+      longitude: coords.longitude,
+      latitude: coords.latitude
+    };
   }
 
   chrome.runtime.sendMessage({
