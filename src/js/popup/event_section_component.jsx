@@ -19,9 +19,9 @@ const updateStyle = {
 class EventSection extends Component {
   constructor(props) {
     super(props);
-    
+
     console.log('props', props);
-    
+
     this.state = {
       artist: props.artist,
       geolocation: null,
@@ -40,7 +40,7 @@ class EventSection extends Component {
     this.setState({
       isLoading: true
     });
-      
+
     // TO DO
     // 1. Create a separate secret function for location
     // 2. show in plugin that browser does not support geolocation thus requiring user to change permissions
@@ -55,7 +55,7 @@ class EventSection extends Component {
           geolocation: position.coords,
           url: getSecretURL(encodeURIComponent(this.state.artist), position.coords)
         });
-        
+
         this.queryArtist();
       });
     } else {
