@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import EventItem from './event_item_component';
 import secrets from "secrets";
+import PropTypes from 'prop-types';
 
 class EventSection extends Component {
   constructor(props) {
