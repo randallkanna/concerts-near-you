@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title></title>
+  <title>Options - Concerts Near You!</title>
+  <style>
+    body: { padding: 10px; }
+  </style>
 </head>
+
 <body>
+  How many concerts you want to list per page?:
+  <select id="pageLimit">
+   <option value="50">50</option>
+   <option value="150">150</option>
+   <option value="-1">Infinite</option>
+  </select>
+
+  <div id="status"></div>
+  <button id="save">Save</button>
+  <button id="close">Close</button>
+  <script src="options.js"></script>
 </body>
 </html>
