@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 import { getSecretURL } from "secrets";
 import LoadingData from './loading_data';
 
+const ulStyle = {
+  listStyle: 'none',
+  padding: 0,
+  width: '336px'
+};
+
 class EventSection extends Component {
   constructor(props) {
     super(props);
@@ -71,12 +77,14 @@ class EventSection extends Component {
         this.setState({
           state: this.state,
           events: events.map((event) => {
+            console.log(event);
             const date = event.dates.start.dateTime;
             const venue = event._embedded.venues[0].name;
             const city = event._embedded.venues[0].city.name;
             const name = event.name;
             const image = event.images[0].url;
             const id = event.id;
+            const url = event.url;
 
             return {
               date,
@@ -84,7 +92,8 @@ class EventSection extends Component {
               name,
               image,
               city,
-              eventId: id
+              eventId: id,
+              url
             };
           })
         });
@@ -135,7 +144,7 @@ function IfEvents(props) {
       <EventItem key={event.eventId} event={event} />
     );
     return (
-        <ul>
+        <ul style={ulStyle}>
           {eventItems}
         </ul>
     );
