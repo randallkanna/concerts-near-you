@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import EventItem from './event_item_component';
-import secrets from "secrets";
 import PropTypes from 'prop-types';
+import { getSecretURL } from "secrets";
 
 class EventSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
       artist: props.artist,
-      events: []
+      events: [],
+      url: getSecretURL(props.artist) // this will hopefully change tomorrow ^^
     };
-    this.url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${secrets.apikey}&keyword=${props.artist}&latlong=37.7749,-122.4194&radius=50`;
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class EventSection extends Component {
   queryArtist() {
     const artistName = this.state.artist;
     if (artistName) {
-      fetch(this.url).then(r => r.json()).then(({ _embedded: { events } }) => {
+      fetch(this.state.url).then(r => r.json()).then(({ _embedded: { events } }) => {
         console.log(events);
         this.setState({
           state: this.state,
