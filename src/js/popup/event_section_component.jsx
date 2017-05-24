@@ -60,6 +60,9 @@ class EventSection extends Component {
       fetch(this.state.url).then(r => r.json()).then(({ _embedded }) => {
 
         if (!_embedded) {
+          this.setState({
+            isLoading: false
+          });
           return;
         }
 
@@ -95,6 +98,11 @@ class EventSection extends Component {
         this.setState({
           isLoading: false
         });
+      });
+    } else {
+      // signal stop loading
+      this.setState({
+        isLoading: false
       });
     }
   }
