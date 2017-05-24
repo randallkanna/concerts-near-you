@@ -20,10 +20,13 @@ let raf;
 let startTime;
 
 function onArtistLoad(timestamp) {
+  const artistName = queryArtistName();
+  const observerNode = queryObserverNode();
+
   if (!startTime) { startTime = timestamp}
 
-  if (!!queryObserverNode() && !!queryArtistName()) {
-    updateArtist(queryArtistName());
+  if (!!observerNode && !!artistName) {
+    updateArtist(artistName);
     setupObserver();
     window.cancelAnimationFrame(raf);
 
@@ -51,7 +54,7 @@ function setupObserver() {
   let artistName = queryArtistName();
 
   const observer = new MutationObserver(() => {
-    let newArtistName = queryArtistName();
+    const newArtistName = queryArtistName();
 
     if (artistName !== newArtistName) {
       artistName = newArtistName;
