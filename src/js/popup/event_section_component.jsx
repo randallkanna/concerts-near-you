@@ -107,11 +107,25 @@ class EventSection extends Component {
     }
   }
 
+  updateArtist() {
+    console.log('updating artist');
+    chrome.tabs.query({active: true, currentWindow: true}, ([tab]) => {
+      chrome.tabs.sendMessage(tab.id, ({
+        type: 'UPDATE_ARTIST_SELECTOR'
+      }))
+    });
+  }
+
   render() {
     if (this.state.isLoading) {
       return <LoadingData artist={this.state.artist}/>
     }
-    return <IfEvents events={this.state.events}/>
+    return (
+      <div>
+        <a onClick={this.updateArtist}>Update</a>
+        <IfEvents events={this.state.events}/>
+      </div>
+    )
   }
 }
 
@@ -121,9 +135,9 @@ function IfEvents(props) {
       <EventItem key={event.eventId} event={event} />
     );
     return (
-      <ul>
-        {eventItems}
-      </ul>
+        <ul>
+          {eventItems}
+        </ul>
     );
   }
   return <NoEvents />
