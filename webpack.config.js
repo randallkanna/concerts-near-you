@@ -21,6 +21,9 @@ var options = {
     background: path.join(__dirname, "src", "js", "background.js"),
     contentScript: path.join(__dirname, "src", "js", "contentScript.js")
   },
+  chromeExtensionBoilerplate: {
+    notHotReload: ["contentScript"]
+  },
   output: {
     path: path.join(__dirname, "build"),
     filename: "[name].bundle.js"

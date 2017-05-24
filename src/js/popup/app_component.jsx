@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 }
 
 App.propTypes = {
-  artist: PropTypes.string.isRequired
+  artist: PropTypes.string
 }
 
 export default App;
