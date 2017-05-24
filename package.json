@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2017": "^6.24.1"
+    "babel-preset-es2017": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1"
   }
 }

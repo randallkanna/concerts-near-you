@@ -3,7 +3,8 @@ var webpack = require("webpack"),
     fileSystem = require("fs"),
     env = require("./utils/env"),
     HtmlWebpackPlugin = require("html-webpack-plugin"),
-    WriteFilePlugin = require("write-file-webpack-plugin");
+    WriteFilePlugin = require("write-file-webpack-plugin"),
+    CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // load the secrets
 var alias = {};
@@ -58,6 +59,9 @@ var options = {
       filename: "background.html",
       chunks: ["background"]
     }),
+    new CopyWebpackPlugin([
+      { from: 'src/icons/icon32.png', to: 'icon32.png' }
+    ]),
     new WriteFilePlugin()
   ]
 };

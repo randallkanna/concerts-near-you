@@ -10,8 +10,10 @@
   "content_scripts": [{
     "matches": ["https://www.pandora.com/*"],
     "js": ["contentScript.bundle.js"]
-
   }],
+  "icons": {
+    "32": "icon32.png"
+  },
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
