@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
 class EventItem extends Component {
   constructor(props) {
@@ -12,11 +13,12 @@ class EventItem extends Component {
   render() {
     console.log(this.state);
     return (
-      <li><img alt={this.state.event.image} src={this.state.event.image} />
-        {this.state.event.name}
-        {this.state.event.date}
-        {this.state.event.venue}
-        {this.state.event.city}
+      <li>
+        <img alt={this.state.event.image} src={this.state.event.image} />
+        <p>{this.state.event.name}</p>
+        <p><Moment format="YYYY-MM-DD HH:mm A">{this.state.event.date}</Moment></p>
+        <p>{this.state.event.venue}</p>
+        <p>{this.state.event.city}</p>
       </li>
     );
   }
