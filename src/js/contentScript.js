@@ -97,3 +97,10 @@ function updateArtist(artist) {
     artist,
   });
 }
+
+
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.type === "UPDATE_ARTIST_SELECTOR") {
+    raf = window.requestAnimationFrame(onArtistLoad);
+  }
+});
