@@ -3,6 +3,7 @@ import EventItem from './event_item_component';
 import NoEvents from './no_events_component';
 import PropTypes from 'prop-types';
 import { getSecretURL } from "secrets";
+import LoadingData from './loading_data';
 
 class EventSection extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class EventSection extends Component {
       artist: props.artist,
       geolocation: null,
       events: [],
+      isLoading: false,
       url: getSecretURL(encodeURIComponent(props.artist)) // this will hopefully change tomorrow ^^
     };
   }
@@ -23,6 +25,11 @@ class EventSection extends Component {
   }
 
   findCurrentLocation() {
+    // signal start loading
+    this.setState({
+      isLoading: true
+    });
+      
     // TO DO
     // 1. Create a separate secret function for location
     // 2. show in plugin that browser does not support geolocation thus requiring user to change permissions
@@ -78,14 +85,25 @@ class EventSection extends Component {
             };
           })
         });
-      }).catch(console.log);
+        // signal stop loading
+        this.setState({
+          isLoading: false
+        });
+      }).catch((e) => {
+        console.log(e);
+        // signal stop loading
+        this.setState({
+          isLoading: false
+        });
+      });
     }
   }
 
   render() {
-    return (
-      <IfEvents events={this.state.events}/>
-    )
+    if (this.state.isLoading) {
+      return <LoadingData artist={this.state.artist}/>
+    }
+    return <IfEvents events={this.state.events}/>
   }
 }
 
