@@ -5,18 +5,19 @@ import PropTypes from 'prop-types';
  class App extends Component {
 
   render() {
-    const { artist } = this.props;
+    const { artist, events } = this.props;
 
     return (
       <div>
-        <EventSection artist={artist} />
+        <EventSection artist={artist} events={events} />
       </div>
     );
   }
 }
 
 App.propTypes = {
-  artist: PropTypes.string
+  artist: PropTypes.string,
+  events: PropTypes.array
 }
 
 export default App;

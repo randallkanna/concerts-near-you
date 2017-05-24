@@ -10,9 +10,9 @@ const appContainerNode = window.document.getElementById("app-container");
   We render the React component with the artist name.
 */
 window.onload = () => {
-  chrome.storage.sync.get(['artist'], (items) => {
+  chrome.storage.sync.get(['artist', 'events'], (items) => {
     render(
-      <App artist={items.artist} />,
+      <App artist={items.artist} events={items.events} />,
       appContainerNode
     );
   });
@@ -23,11 +23,11 @@ window.onload = () => {
   while the popup is open.
 */
 chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.type === "UPDATE_ARTIST") {
+  if (msg.sender === "background" && msg.type === "UPDATE_EVENTS") {
     unmountComponentAtNode(appContainerNode);
 
     render(
-      <App artist={msg.artist} />,
+      <App artist={msg.artist} events={msg.events} />,
       appContainerNode
     );
   }

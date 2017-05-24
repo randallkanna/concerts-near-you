@@ -26,7 +26,7 @@ function onArtistLoad(timestamp) {
   if (!startTime) { startTime = timestamp}
 
   if (!!observerNode && !!artistName) {
-    updateArtist(artistName);
+    findEventsNearYou(artistName);
     setupObserver();
     window.cancelAnimationFrame(raf);
 
@@ -58,7 +58,7 @@ function setupObserver() {
 
     if (artistName !== newArtistName) {
       artistName = newArtistName;
-      updateArtist(artistName);
+      findEventsNearYou(artistName);
     }
 
     observer.disconnect();
@@ -82,18 +82,32 @@ function queryObserverNode() {
 }
 
 /*
-  3. Set artist in Chrome's storage and send message to the popup page (see popup.js)
+  3. Finds events near you for an artist
 
-  We set the artist on storage in case this function is called before the popup is opened.
-  A message sent to popup when it is not opened will be missed. Storing the artist instorage allows
-  the popup to still be able to find the latest artist.
+  Checks geolocation then sends message to backgroundjs
 */
-function updateArtist(artist) {
-  chrome.storage.sync.set({'artist': artist})
+
+function findEventsNearYou(artist) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      updateArtist({artist, coords: position.coords});
+    });
+  } else {
+    updateArtist({artist, coords: null});
+  }
+}
+
+function updateArtist({artist, coords}) {
+  const geo = {
+    longitude: coords.longitude,
+    latitude: coords.latitude
+  }
 
   chrome.runtime.sendMessage({
     sender: 'contentScript',
     type: 'UPDATE_ARTIST',
     artist,
+    geo
   });
 }
+
