@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class NoEvents extends Component {
-  render() {
-    return (
-      <div>No events found for artist.</div>
-    )
-  }
-}
+const NoEvents = () => (<div>No events found for artist.</div>);
+
+export default NoEvents;
