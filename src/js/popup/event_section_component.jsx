@@ -9,7 +9,7 @@ class EventSection extends Component {
     this.state = {
       artist: props.artist,
       events: [],
-      url: getSecretURL(props.artist) // this will hopefully change tomorrow ^^
+      url: getSecretURL(encodeURIComponent(props.artist)) // this will hopefully change tomorrow ^^
     };
   }
 
