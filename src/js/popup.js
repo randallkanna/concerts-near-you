@@ -10,9 +10,9 @@ const appContainerNode = window.document.getElementById("app-container");
   We render the React component with the artist name.
 */
 window.onload = () => {
-  chrome.storage.sync.get(['artist'], (items) => {
+  chrome.storage.sync.get(['artistData'], ({ artistData: { artist, similarArtists }}) => {
     render(
-      <App artist={items.artist} />,
+      <App artist={artist} similarArtists={similarArtists} />,
       appContainerNode
     );
   });
@@ -24,13 +24,12 @@ window.onload = () => {
 */
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === "UPDATE_ARTIST") {
+    const { artistData: { artist, similarArtists } } = msg;
     unmountComponentAtNode(appContainerNode);
 
     render(
-      <App artist={msg.artist} />,
+      <App artist={artist} similarArtists={similarArtists} />,
       appContainerNode
     );
   }
 });
-
-
