@@ -9,6 +9,7 @@ class EventSection extends Component {
     super(props);
     this.state = {
       artist: props.artist,
+      geolocation: {},
       events: [],
       url: getSecretURL(encodeURIComponent(props.artist)) // this will hopefully change tomorrow ^^
     };
@@ -16,6 +17,25 @@ class EventSection extends Component {
 
   componentDidMount() {
     this.queryArtist();
+    this.findCurrentLocation();
+  }
+
+  findCurrentLocation() {
+    // TO DO
+    // 1. Create a separate secret function for location
+    // 2. show in plugin that browser does not support geolocation thus requiring user to change permissions
+    // 3. ask for a zip code and update secretURl if they pass in a zip code or want to change to a new location
+    if (navigator.geolocation) {
+      const setState = this.setState;
+
+      navigator.geolocation.getCurrentPosition ((position) => {
+        this.setState({
+          geolocation: position.coords,
+        });
+      });
+    } else {
+      console.log("Browser does not support geolocation.");
+    }
   }
 
   queryArtist() {
