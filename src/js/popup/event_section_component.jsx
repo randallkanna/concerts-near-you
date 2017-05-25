@@ -11,6 +11,11 @@ const ulStyle = {
   width: '336px'
 };
 
+const updateStyle = {
+  float: 'right',
+  cursor: 'pointer'
+}
+
 class EventSection extends Component {
   constructor(props) {
     super(props);
@@ -131,7 +136,7 @@ class EventSection extends Component {
     }
     return (
       <div>
-        <a onClick={this.updateArtist}>Update</a>
+        <a style={updateStyle} onClick={this.updateArtist}>Refresh</a>
         <IfEvents events={this.state.events}/>
       </div>
     )

@@ -10,7 +10,8 @@ const divStyle = {
 }
 
 const liStyle = {
-  padding: '12px 22px'
+  padding: '12px 22px',
+  borderBottom: '1px solid rgba(0,0,0,0.08)'
 };
 
 const imgStyle = {
