@@ -4,13 +4,11 @@ import NoEvents from './no_events_component';
 import PropTypes from 'prop-types';
 import { getSecretURL } from "secrets";
 import LoadingData from './loading_data';
+import MapSection from './map_section_component';
 
 class EventSection extends Component {
   constructor(props) {
     super(props);
-    
-    console.log('props', props);
-    
     this.state = {
       artist: props.artist,
       geolocation: null,
@@ -44,6 +42,9 @@ class EventSection extends Component {
           geolocation: position.coords,
           url: getSecretURL(encodeURIComponent(this.state.artist), position.coords)
         });
+
+        console.log("log coordinate after find location: ");
+        console.log(this.state);
         
         this.queryArtist();
       });
@@ -58,7 +59,7 @@ class EventSection extends Component {
     console.log("requesting url ", this.state.url);
     if (artistName) {
       fetch(this.state.url).then(r => r.json()).then(({ _embedded }) => {
-
+        
         if (!_embedded) {
           this.setState({
             isLoading: false
@@ -123,7 +124,7 @@ class EventSection extends Component {
     return (
       <div>
         <a onClick={this.updateArtist}>Update</a>
-        <IfEvents events={this.state.events}/>
+        <IfEvents events={this.state.events} geolocation={this.state.geolocation}/>
       </div>
     )
   }
@@ -135,9 +136,13 @@ function IfEvents(props) {
       <EventItem key={event.eventId} event={event} />
     );
     return (
+      <div>
         <ul>
           {eventItems}
         </ul>
+        <MapSection events={props.events} geolocation={props.geolocation}/>
+      </div>
+        
     );
   }
   return <NoEvents />
