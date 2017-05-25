@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
  class App extends Component {
 
   render() {
-    const { artist, similarArtists } = this.props;
+    const { artist, similarArtists, range } = this.props;
 
     return (
       <div>
-        <EventSection artist={artist} />
+        <EventSection artist={artist} range={range} />
         <SimilarArtists similarArtists={similarArtists} />
       </div>
     );
@@ -18,7 +18,8 @@ import PropTypes from 'prop-types';
 }
 
 App.propTypes = {
-  artist: PropTypes.string
+  artist: PropTypes.string,
+  range: PropTypes.string
 }
 
 export default App;

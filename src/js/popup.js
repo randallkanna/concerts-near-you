@@ -10,9 +10,9 @@ const appContainerNode = window.document.getElementById("app-container");
   We render the React component with the artist name.
 */
 window.onload = () => {
-  chrome.storage.sync.get(['artistData'], ({ artistData: { artist, similarArtists }}) => {
+  chrome.storage.sync.get(['artistData', 'range'], ({ artistData: { artist, similarArtists }, range}) => {
     render(
-      <App artist={artist} similarArtists={similarArtists} />,
+      <App artist={artist} similarArtists={similarArtists} range={items.range} />,
       appContainerNode
     );
   });
