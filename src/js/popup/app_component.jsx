@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
  class App extends Component {
 
   render() {
+  	console.log("Within App Component rendering...");
+  	console.log(this.props);
+  	
     const { artist, similarArtists, range } = this.props;
 
     return (

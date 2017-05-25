@@ -12,7 +12,7 @@ const appContainerNode = window.document.getElementById("app-container");
 window.onload = () => {
   chrome.storage.sync.get(['artistData', 'range'], ({ artistData: { artist, similarArtists }, range}) => {
     render(
-      <App artist={artist} similarArtists={similarArtists} range={items.range} />,
+      <App artist={artist} similarArtists={similarArtists} range={range} />,
       appContainerNode
     );
   });

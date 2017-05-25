@@ -16,7 +16,8 @@ class EventSection extends Component {
       geolocation: null,
       events: [],
       isLoading: false,
-      url: getSecretURL(encodeURIComponent(props.artist)) // this will hopefully change tomorrow ^^
+      range: props.range,
+      url: getSecretURL(encodeURIComponent(props.artist), null, props.range) // this will hopefully change tomorrow ^^
     };
   }
 
@@ -42,7 +43,7 @@ class EventSection extends Component {
 
         this.setState({
           geolocation: position.coords,
-          url: getSecretURL(encodeURIComponent(this.state.artist), position.coords)
+          url: getSecretURL(encodeURIComponent(this.state.artist), position.coords, this.state.range)
         });
         
         this.queryArtist();
@@ -118,7 +119,7 @@ class EventSection extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return <LoadingData artist={this.state.artist}/>
+      return <LoadingData artist={this.state.artist} range={this.state.range}/>
     }
     return (
       <div>
